@@ -141,7 +141,7 @@
                         <outlet property="name" destination="Aoo-LJ-OJ8" id="Ja9-dL-4hy"/>
                         <outlet property="searchField" destination="Qpd-Cm-IlP" id="one-Ky-be6"/>
                         <outlet property="season" destination="tDI-pj-oWR" id="DLS-Ey-IG2"/>
-                        <segue destination="xCT-Ai-pb7" kind="presentation" modalPresentationStyle="fullScreen" id="yiF-Lg-HtS"/>
+                        <segue destination="xCT-Ai-pb7" kind="presentation" identifier="goDetails" modalPresentationStyle="fullScreen" id="yiF-Lg-HtS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lki-oM-fwd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -155,137 +155,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o1J-vK-lh8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="887" y="141"/>
-        </scene>
-        <!--Characters Controller-->
-        <scene sceneID="DTQ-5z-afV">
-            <objects>
-                <viewController storyboardIdentifier="CharV" id="r2j-te-tQa" customClass="CharactersController" customModule="rickMorty" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="DAE-Ud-bJx">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" alignment="center" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="m0f-ix-TSb">
-                                <rect key="frame" x="0.0" y="44" width="414" height="798"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lQm-w7-ICv">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="133"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="December 2, 2013" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E13-aQ-CAU">
-                                                <rect key="frame" x="20" y="102" width="374" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" name="MarkerFelt-Wide" family="Marker Felt" pointSize="23"/>
-                                                <color key="textColor" red="0.99990516900000004" green="1" blue="0.99987047910000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xM2-lh-wFG">
-                                                <rect key="frame" x="20" y="8" width="46.5" height="63"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <color key="tintColor" red="0.49038326739999999" green="0.90849417450000003" blue="0.32103008030000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <state key="normal">
-                                                    <imageReference key="image" image="arrowshape.turn.up.left.fill" catalog="system" symbolScale="medium"/>
-                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="37" scale="medium" weight="bold"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="Back:" destination="r2j-te-tQa" eventType="touchUpInside" id="kCU-gm-9Oy"/>
-                                                </connections>
-                                            </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="S01E01" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Im7-6F-xoI">
-                                                <rect key="frame" x="150" y="0.0" width="115" height="44.5"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" name="MarkerFelt-Wide" family="Marker Felt" pointSize="34"/>
-                                                <color key="textColor" red="0.99990516900000004" green="1" blue="0.99987047910000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Pilot" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kpl-Kx-wRK">
-                                                <rect key="frame" x="98" y="48" width="218" height="45"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" name="MarkerFelt-Wide" family="Marker Felt" pointSize="34"/>
-                                                <color key="textColor" red="0.49038326739999999" green="0.90849417450000003" blue="0.32103008030000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                    </view>
-                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ya2-dJ-eUH">
-                                        <rect key="frame" x="0.0" y="142" width="414" height="656"/>
-                                        <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search for Character" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="w0k-Q3-XVX">
-                                                <rect key="frame" x="20" y="0.0" width="374" height="34"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                                <connections>
-                                                    <action selector="searchText:" destination="r2j-te-tQa" eventType="editingChanged" id="IFa-CP-yUb"/>
-                                                </connections>
-                                            </textField>
-                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="pyA-cu-EIf">
-                                                <rect key="frame" x="20" y="42" width="374" height="606"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <color key="backgroundColor" systemColor="labelColor"/>
-                                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="oKp-9J-bra">
-                                                    <size key="itemSize" width="175" height="234"/>
-                                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                </collectionViewFlowLayout>
-                                                <cells>
-                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="charCell" id="u5Y-vK-kFA" customClass="CharactersCell" customModule="rickMorty" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="177" height="270"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="9ab-5I-K2V">
-                                                            <rect key="frame" x="0.0" y="0.0" width="177" height="270"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <subviews>
-                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yNl-hg-skT">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="177" height="179"/>
-                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                </imageView>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Morty Smith" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EBZ-Do-37V">
-                                                                    <rect key="frame" x="8" y="187" width="161" height="25"/>
-                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                    <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="23"/>
-                                                                    <color key="textColor" red="0.99990516900000004" green="1" blue="0.99987047910000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Alive" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D9Y-Sw-qF2">
-                                                                    <rect key="frame" x="8" y="220" width="161" height="42"/>
-                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                    <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="33"/>
-                                                                    <color key="textColor" red="0.49038326739999999" green="0.90849417450000003" blue="0.32103008030000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
-                                                            </subviews>
-                                                        </collectionViewCellContentView>
-                                                        <size key="customSize" width="177" height="270"/>
-                                                        <connections>
-                                                            <outlet property="charImg" destination="yNl-hg-skT" id="0KB-1H-cir"/>
-                                                            <outlet property="charName" destination="EBZ-Do-37V" id="aJf-ZU-6DA"/>
-                                                            <outlet property="charStatus" destination="D9Y-Sw-qF2" id="V68-ZZ-lor"/>
-                                                        </connections>
-                                                    </collectionViewCell>
-                                                </cells>
-                                            </collectionView>
-                                        </subviews>
-                                    </view>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="lQm-w7-ICv" firstAttribute="leading" secondItem="ya2-dJ-eUH" secondAttribute="leading" id="z3E-v8-hig"/>
-                                </constraints>
-                            </stackView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="JIO-vu-g4x"/>
-                        <color key="backgroundColor" systemColor="labelColor"/>
-                    </view>
-                    <connections>
-                        <outlet property="airDate" destination="E13-aQ-CAU" id="Gi9-B3-fIK"/>
-                        <outlet property="charColl" destination="pyA-cu-EIf" id="2wG-hc-wcH"/>
-                        <outlet property="name" destination="Kpl-Kx-wRK" id="UQl-jt-ZqQ"/>
-                        <outlet property="searchField" destination="w0k-Q3-XVX" id="zIP-Cb-i44"/>
-                        <outlet property="season" destination="Im7-6F-xoI" id="3uP-ok-bOw"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Dut-HV-wa2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1660.8695652173915" y="119.86607142857142"/>
         </scene>
     </scenes>
     <resources>
