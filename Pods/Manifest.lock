@@ -1,0 +1,16 @@
+PODS:
+  - LUAutocompleteView (4.0.0)
+
+DEPENDENCIES:
+  - LUAutocompleteView
+
+SPEC REPOS:
+  trunk:
+    - LUAutocompleteView
+
+SPEC CHECKSUMS:
+  LUAutocompleteView: 604edbbb358d77c8fff4b86137db76a38eb4beda
+
+PODFILE CHECKSUM: 12764ded96a4b8a65fd1f8103b8b73bba37831fd
+
+COCOAPODS: 1.10.1
