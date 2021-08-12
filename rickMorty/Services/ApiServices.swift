@@ -6,23 +6,18 @@
 //
 
 import Foundation
-struct Resource<T> {
-    let url: URL?
-    let parse: (Data) -> T?
-}
+import Alamofire
+import RxSwift
+import RxCocoa
+
 final class ApiServices {
-    static func load<T>(resource: Resource<T>,completion: @escaping (T?) -> ()) {
-       guard let url = resource.url else { return}
+    static func load<T: Decodable>(url: URL, model: T.Type) -> Observable<T> {
+        let subject = PublishSubject<T>()
+        AF.request(url).validate().responseDecodable(of: model) { (result) in
+            guard let res = result.value else {return}
+            subject.onNext(res)
+        }
         
-        URLSession.shared.dataTask(with: url) { (data, res, err) in
-    
-            if let data = data {
-                DispatchQueue.main.async {
-                    completion(resource.parse(data))
-                }
-            } else {
-                print(err!)
-            }
-}.resume()
+        return subject
 }
 }

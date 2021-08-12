@@ -7,21 +7,31 @@
 
 import UIKit
 import LUAutocompleteView
+import RxSwift
+import RxCocoa
+import SDWebImage
 class CharactersController: UIViewController {
-    @IBOutlet private weak var charColl: UICollectionView!
+    @IBOutlet weak var charColl: UICollectionView!
     @IBOutlet private weak var season: UILabel!
     @IBOutlet private weak var name: UILabel!
     @IBOutlet private weak var airDate: UILabel!
     @IBOutlet private weak var searchField: UITextField!
-    var vm: CharactersViewModel!
+    var vm = CharactersViewModel()
+    var db = DisposeBag()
     private let autoCompView = LUAutocompleteView()
     private var datasource: CollViewDataSource<CharactersCell, CharactersM>!
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(autoCompView)
         Assign()
-        loadData()
-        Display()
+        vm.episode
+            .subscribe(onNext: { [self] response in
+                AttachUI(item: response!)
+            }).disposed(by: db)
+        vm.charIds
+            .subscribe(onNext: { [self] response in
+                loadData()
+            }).disposed(by: db)
     }
     private func Assign() {
         charColl.delegate = self
@@ -31,11 +41,13 @@ class CharactersController: UIViewController {
         autoCompView.dataSource = self
         
         }
-    private func Display() {
-        airDate.text = vm.episode.airDate
-        season.text = vm.episode.episode
-        name.text = vm.episode.name
-        datasource = CollViewDataSource(cellIdentifier: "charCell", items: vm.characters) { cell, vm in
+    private func AttachUI(item: EpisodeRes) {
+        airDate.text = item.airDate
+        season.text = item.episode
+        name.text = item.name
+    }
+    private func DisplayCell() {
+        datasource = CollViewDataSource(cellIdentifier: "charCell", items: vm.character.value) { cell, vm in
             cell.charName.text = vm.name
             if vm.status != "Alive" {
                 cell.charStatus.textColor = .red
@@ -44,30 +56,28 @@ class CharactersController: UIViewController {
                 cell.charStatus.textColor = .green
             }
             cell.charStatus.text = vm.status
-            vm.image.downloadImage{(image) in
-                DispatchQueue.main.async {
-                    cell.charImg.image = image
-                }
-            }
+            cell.charImg.sd_setImage(with: URL(string: vm.image))
             }
     
         charColl.dataSource = datasource
     }
     private func loadData() {
-        vm.fetchChar(completion: {
-            DispatchQueue.main.async { [weak self] in
-                self?.datasource.updateItems((self?.vm.characters)!)
-                self?.charColl.reloadData()
-            }
-        })
+        vm.fetchChar()
+        vm.character
+                .subscribe(onNext: { result in
+                    DispatchQueue.main.async { [self] in
+                self.DisplayCell()
+                self.charColl.reloadData()
+                }
+            }).disposed(by: self.db)
     }
     @IBAction private func Back(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
     override  func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let DetailsVc = segue.destination as? DetailsController{
-            DetailsVc.vm = DetailsViewModel(charDetail: vm.characters[vm.selectedIndex])
-        }
+        let DetailsVc = segue.destination as! DetailsController
+        DetailsVc.vm.charDetail.accept(vm.passedArray[vm.selectedIndex])
+        vm.passedArray = vm.character.value
     }
     @IBAction private func searchText(_ sender: UITextField) {
         vm.search(sender.text ?? "")
@@ -82,7 +92,7 @@ extension CharactersController: UICollectionViewDelegate {
 }
 extension CharactersController: LUAutocompleteViewDataSource {
     func autocompleteView(_ autocompleteView: LUAutocompleteView, elementsFor text: String, completion: @escaping ([String]) -> Void) {
-        let elementsThatMatchInput = vm.filtered.map{$0.name}.filter { $0.lowercased().contains(text.lowercased()) }
+        let elementsThatMatchInput = vm.filtered.value.map{$0.name}.filter { $0.lowercased().contains(text.lowercased()) }
         completion(elementsThatMatchInput)
     }
 }
@@ -90,8 +100,8 @@ extension CharactersController: LUAutocompleteViewDataSource {
 // MARK: - LUAutocompleteViewDelegate
 extension CharactersController: LUAutocompleteViewDelegate {
     func autocompleteView(_ autocompleteView: LUAutocompleteView, didSelect text: String) {
-        vm.selectedIndex = vm.filtered.firstIndex(where: {$0.name == text})!
-        vm.characters = vm.filtered
+        vm.selectedIndex = vm.filtered.value.firstIndex(where: {$0.name == text})!
+        vm.passedArray = vm.filtered.value
         searchField.text = ""
         performSegue(withIdentifier: "goDetails", sender: nil)
     }

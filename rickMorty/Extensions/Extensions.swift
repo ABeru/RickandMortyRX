@@ -34,5 +34,6 @@ extension LUAutocompleteView {
         self.rowHeight = 45
         self.maximumHeight = 300
         self.textField = textField
+        
     }
 }

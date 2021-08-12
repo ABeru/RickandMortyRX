@@ -5,7 +5,10 @@ target 'rickMorty' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
-  # Pods for rickMorty
-   pod 'LUAutocompleteView'
-
+pod 'LUAutocompleteView'
+  pod 'Alamofire'
+  pod 'SkeletonView'
+  pod 'RxSwift'
+  pod 'RxCocoa'
+  pod 'SDWebImage'
 end

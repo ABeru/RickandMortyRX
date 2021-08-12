@@ -6,49 +6,39 @@
 //
 
 import Foundation
+import RxSwift
+import RxCocoa
+import Alamofire
 class CharactersViewModel {
-    var characters = [CharactersM]()
-    var filtered = [CharactersM]()
-    var charIds: [Int]
+    var character = BehaviorRelay(value: [CharactersM]())
+    var filtered = BehaviorRelay(value: [CharactersM]())
+    var passedArray = [CharactersM]()
+    var charIds = BehaviorRelay(value: [Int]())
     var selectedIndex = 0
-    var episode: EpisodeRes
-    init(charIds: [Int], episode: EpisodeRes) {
-        self.charIds = charIds
-        self.episode = episode
-    }
+    var db = DisposeBag()
+    var episode = BehaviorRelay<EpisodeRes?>(value: nil)
     func modelAt(_ index: Int) {
         selectedIndex = index
     }
     func search(_ query: String) {
         if query.isEmpty == false {
-            filtered.removeAll()
             filterChar(for: query)
         }
     }
-    func fetchChar(completion: @escaping () -> Void) {
-        let charUrl = Constants.Urls.urlForChar(ids: charIds)
-        let charResource = Resource<[CharactersM]>(url: charUrl) { data in
-            let charResp = try? JSONDecoder().decode([CharactersM].self, from: data)
-            return charResp
-        }
-        ApiServices.load(resource: charResource) { (result) in
-            if result != nil {
-                self.characters.append(contentsOf: result!)
-              completion()
-            }
-        }
-        
+    func fetchChar()  {
+        guard let url = Constants.Urls.urlForChar(apiAddress: Constants.apiAddress,ids: charIds.value) else {return}
+        ApiServices.load(url: url, model: [CharactersM].self)
+            .subscribe(onNext: {response in
+                self.character.accept(response)
+                self.passedArray = self.character.value
+            }).disposed(by: db)
+       
     }
     func filterChar(for query: String) {
-        let filterURL = Constants.Urls.urlForFilterChar(query: query)
-        let filterResource = Resource<FilterM>(url: filterURL) { data in
-            let filterResp = try? JSONDecoder().decode(FilterM.self, from: data)
-            return filterResp
-        }
-        ApiServices.load(resource: filterResource) { (result) in
-            if result != nil {
-                self.filtered.append(contentsOf: result!.results)
-            }
-        }
-    }
+        guard let url = Constants.Urls.urlForFilterChar(apiAddress: Constants.apiAddress, query: query) else {return}
+        ApiServices.load(url: url, model: FilterM.self)
+            .subscribe(onNext: { response in
+                self.filtered.accept(response.results)
+            }).disposed(by: db)
+}
 }

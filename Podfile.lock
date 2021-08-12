@@ -1,16 +1,44 @@
 PODS:
+  - Alamofire (5.4.3)
   - LUAutocompleteView (4.0.0)
+  - RxCocoa (6.2.0):
+    - RxRelay (= 6.2.0)
+    - RxSwift (= 6.2.0)
+  - RxRelay (6.2.0):
+    - RxSwift (= 6.2.0)
+  - RxSwift (6.2.0)
+  - SDWebImage (5.11.1):
+    - SDWebImage/Core (= 5.11.1)
+  - SDWebImage/Core (5.11.1)
+  - SkeletonView (1.21.2)
 
 DEPENDENCIES:
+  - Alamofire
   - LUAutocompleteView
+  - RxCocoa
+  - RxSwift
+  - SDWebImage
+  - SkeletonView
 
 SPEC REPOS:
   trunk:
+    - Alamofire
     - LUAutocompleteView
+    - RxCocoa
+    - RxRelay
+    - RxSwift
+    - SDWebImage
+    - SkeletonView
 
 SPEC CHECKSUMS:
+  Alamofire: e447a2774a40c996748296fa2c55112fdbbc42f9
   LUAutocompleteView: 604edbbb358d77c8fff4b86137db76a38eb4beda
+  RxCocoa: 4baf94bb35f2c0ab31bc0cb9f1900155f646ba42
+  RxRelay: e72dbfd157807478401ef1982e1c61c945c94b2f
+  RxSwift: d356ab7bee873611322f134c5f9ef379fa183d8f
+  SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
+  SkeletonView: a085533443fed0198309f1979780afb6e80eaedd
 
-PODFILE CHECKSUM: 12764ded96a4b8a65fd1f8103b8b73bba37831fd
+PODFILE CHECKSUM: 48577185df47c2d57a4170048ba8d8e7cbaaefc3
 
 COCOAPODS: 1.10.1

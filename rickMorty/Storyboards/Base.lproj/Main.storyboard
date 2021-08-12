@@ -149,7 +149,7 @@
                     <connections>
                         <outlet property="epCollection" destination="jbT-Ia-1qJ" id="kTK-xl-Rp3"/>
                         <outlet property="searchName" destination="bpe-HZ-kjW" id="u65-F1-0w4"/>
-                        <segue destination="2yn-MJ-Mxh" kind="presentation" identifier="goChar" modalPresentationStyle="fullScreen" id="7NX-zk-OKF"/>
+                        <segue destination="2yn-MJ-Mxh" kind="presentation" identifier="goChar" modalPresentationStyle="fullScreen" modalTransitionStyle="flipHorizontal" id="7NX-zk-OKF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

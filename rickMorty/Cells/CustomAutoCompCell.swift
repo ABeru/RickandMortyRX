@@ -9,10 +9,12 @@ import LUAutocompleteView
 
 final class CustomAutocompleteTableViewCell: LUAutocompleteTableViewCell {
     // MARK: - Base Class Overrides
-
-    override func set(text: String) {
+  
+    
+        override func set(text: String) {
         textLabel?.text = text
         textLabel?.textColor = .black
         textLabel?.font = UIFont(name: "Marker Felt Thin", size: 20)
+        
     }
 }

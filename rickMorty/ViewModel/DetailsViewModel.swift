@@ -6,86 +6,59 @@
 //
 
 import Foundation
+import RxCocoa
+import RxSwift
 class DetailsViewModel {
-    var detEpisodes = [EpisodeRes]()
-    var chars = [CharactersM]()
+    var detEpisodes = BehaviorRelay(value: [EpisodeRes]())
+    var chars = BehaviorRelay(value: [CharactersM]())
     var selectedIndex = 0
-    var charDetail: CharactersM
-    init(charDetail: CharactersM) {
-        self.charDetail = charDetail
-    }
+    var db = DisposeBag()
+    var charDetail = BehaviorRelay<CharactersM?>(value: nil)
     func modelAt(_ index: Int) {
         selectedIndex = index
     }
     func search(_ query: String) {
         if query.isEmpty == false {
-            chars.removeAll()
             filterChar(for: query)
              }
-        else {
-            chars.removeAll()
-        }
     }
-    func fetchEp(completion: @escaping () -> Void) {
-        let lastChar = charDetail.episode[0].lastIndex(of: "/")
-        let tempArr = charDetail.episode.map{String($0[lastChar!...].dropFirst())}
+    func fetchEp() {
+        let lastChar = charDetail.value!.episode[0].lastIndex(of: "/")
+        let tempArr = charDetail.value!.episode.map{String($0[lastChar!...].dropFirst())}
         let tempArr2 = tempArr.map{Int($0)!}
         if tempArr2.count == 1 {
-            detEpisodes.removeAll()
-            fetchSingleEpisode(id: tempArr2[0]) { (result) in
-                self.detEpisodes.append(result)
-                completion()
-            }
+            fetchSingleEpisode(id: tempArr2[0])
         }
         else {
-            detEpisodes.removeAll()
-            fetchEpisodes(ids: tempArr2) { (result) in
-                self.detEpisodes.append(contentsOf: result)
-            completion()
-        }
+            fetchEpisodes(ids: tempArr2) 
         }
     }
     func getIds(_ index: Int) -> [Int] {
-        let lastChar = self.detEpisodes[0].characters[0].lastIndex(of: "/")
-        let arr = self.detEpisodes.map{$0.characters.map{String($0[lastChar!...].dropFirst())}}
+        let lastChar = self.detEpisodes.value[0].characters[0].lastIndex(of: "/")
+        let arr = self.detEpisodes.value.map{$0.characters.map{String($0[lastChar!...].dropFirst())}}
         let intArr = arr[index].map{Int($0)!}
         return intArr
     }
-    func fetchSingleEpisode(id: Int, completion: @escaping (EpisodeRes) -> Void) {
-        let charUrl = Constants.Urls.urlForSingleEp(id: id)
-        let charResource = Resource<EpisodeRes>(url: charUrl) { data in
-            let charResp = try? JSONDecoder().decode(EpisodeRes.self, from: data)
-            return charResp
-        }
-        ApiServices.load(resource: charResource) { (result) in
-            if result != nil {
-                completion(result!)
-            }
-        }
+    func fetchSingleEpisode(id: Int) {
+        guard let url = Constants.Urls.urlForSingleEp(apiAddress: Constants.apiAddress,id: id) else {return}
+            ApiServices.load(url: url, model: EpisodeRes.self)
+                .subscribe(onNext: {response in
+                    self.detEpisodes.accept([response])
+                }).disposed(by: db)
     }
-    func fetchEpisodes(ids: [Int], completion: @escaping ([EpisodeRes]) -> Void) {
-            let charUrl = Constants.Urls.urlForEpisode(ids: ids)
-            let charResource = Resource<[EpisodeRes]>(url: charUrl) { data in
-                let charResp = try? JSONDecoder().decode([EpisodeRes].self, from: data)
-                return charResp
-            }
-            ApiServices.load(resource: charResource) { (result) in
-                if result != nil {
-                    completion(result!)
-                }
-            }
+    func fetchEpisodes(ids: [Int]) {
+        guard let url = Constants.Urls.urlForEpisode(apiAddress: Constants.apiAddress,ids: ids) else {return}
+            ApiServices.load(url: url, model: [EpisodeRes].self)
+                .subscribe(onNext: {response in
+                    self.detEpisodes.accept(response)
+                }).disposed(by: db)
         }
     func filterChar(for query: String) {
-        let filterURL = Constants.Urls.urlForFilterChar(query: query)
-        let filterResource = Resource<FilterM>(url: filterURL) { data in
-            let filterResp = try? JSONDecoder().decode(FilterM.self, from: data)
-            return filterResp
-        }
-        ApiServices.load(resource: filterResource) { (result) in
-            if result != nil {
-                self.chars.append(contentsOf: result!.results)
-            }
-        }
+        guard let url = Constants.Urls.urlForFilterChar(apiAddress: Constants.apiAddress, query: query) else {return}
+        ApiServices.load(url: url, model: FilterM.self)
+            .subscribe(onNext: { response in
+                self.chars.accept(response.results)
+            }).disposed(by: db)
     }
 
 }
