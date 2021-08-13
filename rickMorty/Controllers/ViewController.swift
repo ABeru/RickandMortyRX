@@ -57,6 +57,7 @@ class ViewController: UIViewController {
         }
     }
     @IBAction private func searchTextChanged(_ sender: UITextField) {
+        
         vm.search(sender.text ?? "")
     }
 }

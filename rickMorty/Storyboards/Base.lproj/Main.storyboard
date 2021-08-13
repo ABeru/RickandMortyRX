@@ -98,7 +98,7 @@
                                 <rect key="frame" x="31" y="137.5" width="353" height="34"/>
                                 <color key="backgroundColor" red="0.99990516901016235" green="1" blue="0.99987047910690308" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                 <connections>
                                     <action selector="searchTextChanged:" destination="BYZ-38-t0r" eventType="editingChanged" id="5OF-G7-LM2"/>
                                 </connections>

@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (5.4.3)
+  - IQKeyboardManagerSwift (6.5.6)
   - LUAutocompleteView (4.0.0)
   - RxCocoa (6.2.0):
     - RxRelay (= 6.2.0)
@@ -14,6 +15,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire
+  - IQKeyboardManagerSwift
   - LUAutocompleteView
   - RxCocoa
   - RxSwift
@@ -23,6 +25,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Alamofire
+    - IQKeyboardManagerSwift
     - LUAutocompleteView
     - RxCocoa
     - RxRelay
@@ -32,6 +35,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: e447a2774a40c996748296fa2c55112fdbbc42f9
+  IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
   LUAutocompleteView: 604edbbb358d77c8fff4b86137db76a38eb4beda
   RxCocoa: 4baf94bb35f2c0ab31bc0cb9f1900155f646ba42
   RxRelay: e72dbfd157807478401ef1982e1c61c945c94b2f
@@ -39,6 +43,6 @@ SPEC CHECKSUMS:
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
   SkeletonView: a085533443fed0198309f1979780afb6e80eaedd
 
-PODFILE CHECKSUM: 48577185df47c2d57a4170048ba8d8e7cbaaefc3
+PODFILE CHECKSUM: 0603590785d1f7665c15aee748655b8ab4552f91
 
 COCOAPODS: 1.10.1

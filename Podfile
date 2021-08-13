@@ -11,4 +11,5 @@ pod 'LUAutocompleteView'
   pod 'RxSwift'
   pod 'RxCocoa'
   pod 'SDWebImage'
+  pod 'IQKeyboardManagerSwift'
 end
