@@ -9,7 +9,8 @@ import Foundation
 import Alamofire
 import RxSwift
 import RxCocoa
-
+import Reachability
+import RxReachability
 final class ApiServices {
     static func load<T: Decodable>(url: URL, model: T.Type) -> Observable<T> {
         let subject = PublishSubject<T>()

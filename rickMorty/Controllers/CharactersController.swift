@@ -26,18 +26,14 @@ class CharactersController: UIViewController {
         super.viewDidLoad()
         view.addSubview(autoCompView)
         Assign()
-        vm.episode
-            .subscribe(onNext: { [self] response in
-                AttachUI(item: response!)
-            }).disposed(by: db)
-        vm.charIds
-            .subscribe(onNext: { [self] response in
-                loadData()
-            }).disposed(by: db)
+        loadData()
         Reachability.rx.isReachable
             .subscribe(onNext: { connection in
                 if connection == false {
                 self.ShowConnectionAlert()
+                }
+                else {
+                    self.loadData()
                 }
             }).disposed(by: db)
     }
@@ -62,7 +58,14 @@ class CharactersController: UIViewController {
         charColl.dataSource = datasource
     }
     private func loadData() {
-        vm.fetchChar()
+        vm.episode
+            .subscribe(onNext: { [self] response in
+                AttachUI(item: response!)
+            }).disposed(by: db)
+        vm.charIds
+            .subscribe(onNext: { [self] response in
+                vm.fetchChar()
+            }).disposed(by: db)
         vm.character
                 .subscribe(onNext: { result in
                     DispatchQueue.main.async { [self] in

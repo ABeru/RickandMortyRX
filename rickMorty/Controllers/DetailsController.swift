@@ -39,6 +39,9 @@ class DetailsController: UIViewController {
                 if connection == false {
                 self.ShowConnectionAlert()
                 }
+                else {
+                    self.loadEpisodes()
+                }
             }).disposed(by: db)
     }
     private func Assign() {

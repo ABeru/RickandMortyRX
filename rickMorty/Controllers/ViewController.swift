@@ -23,12 +23,14 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         view.addSubview(autoCompView)
         Assign()
-        loadEpisodes()
         Display()
         Reachability.rx.isReachable
             .subscribe(onNext: { connection in
                 if connection == false {
                 self.ShowConnectionAlert()
+                }
+                else {
+                    self.loadEpisodes()
                 }
             }).disposed(by: db)
 
@@ -47,6 +49,7 @@ class ViewController: UIViewController {
         epCollection.dataSource = datasource
     }
     private func loadEpisodes() {
+        
         vm.fetchEpisodes()
         vm.episodes
             .subscribe(onNext: { response in
