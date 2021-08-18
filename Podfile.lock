@@ -2,9 +2,14 @@ PODS:
   - Alamofire (5.4.3)
   - IQKeyboardManagerSwift (6.5.6)
   - LUAutocompleteView (4.0.0)
+  - ReachabilitySwift (5.0.0)
   - RxCocoa (6.2.0):
     - RxRelay (= 6.2.0)
     - RxSwift (= 6.2.0)
+  - RxReachability (1.2.1):
+    - ReachabilitySwift (< 6.0, >= 5.0)
+    - RxCocoa (~> 6)
+    - RxSwift (~> 6)
   - RxRelay (6.2.0):
     - RxSwift (= 6.2.0)
   - RxSwift (6.2.0)
@@ -17,7 +22,9 @@ DEPENDENCIES:
   - Alamofire
   - IQKeyboardManagerSwift
   - LUAutocompleteView
+  - ReachabilitySwift
   - RxCocoa
+  - RxReachability
   - RxSwift
   - SDWebImage
   - SkeletonView
@@ -27,7 +34,9 @@ SPEC REPOS:
     - Alamofire
     - IQKeyboardManagerSwift
     - LUAutocompleteView
+    - ReachabilitySwift
     - RxCocoa
+    - RxReachability
     - RxRelay
     - RxSwift
     - SDWebImage
@@ -37,12 +46,14 @@ SPEC CHECKSUMS:
   Alamofire: e447a2774a40c996748296fa2c55112fdbbc42f9
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
   LUAutocompleteView: 604edbbb358d77c8fff4b86137db76a38eb4beda
+  ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
   RxCocoa: 4baf94bb35f2c0ab31bc0cb9f1900155f646ba42
+  RxReachability: bfd13548bf1dac7a877082d13918a9f39bdb5c18
   RxRelay: e72dbfd157807478401ef1982e1c61c945c94b2f
   RxSwift: d356ab7bee873611322f134c5f9ef379fa183d8f
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
   SkeletonView: a085533443fed0198309f1979780afb6e80eaedd
 
-PODFILE CHECKSUM: 0603590785d1f7665c15aee748655b8ab4552f91
+PODFILE CHECKSUM: 31863f15f69b16ba82f915209243437558f63857
 
 COCOAPODS: 1.10.1

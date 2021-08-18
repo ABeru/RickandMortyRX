@@ -10,6 +10,8 @@ import LUAutocompleteView
 import SkeletonView
 import RxCocoa
 import RxSwift
+import RxReachability
+import Reachability
 class ViewController: UIViewController {
     @IBOutlet private weak var searchName: UITextField!
     @IBOutlet private weak var epCollection: UICollectionView!
@@ -23,6 +25,13 @@ class ViewController: UIViewController {
         Assign()
         loadEpisodes()
         Display()
+        Reachability.rx.isReachable
+            .subscribe(onNext: { connection in
+                if connection == false {
+                self.ShowConnectionAlert()
+                }
+            }).disposed(by: db)
+
     }
     private func Assign() {
         epCollection.assignLayout(size: self.view.frame.width, height: 140)
@@ -33,9 +42,7 @@ class ViewController: UIViewController {
     }
     private func Display() {
         datasource = CollViewDataSource(cellIdentifier: "episodesCell", items: self.vm.episodes.value) { cell, vm in
-            cell.airDate.text = vm.airDate
-            cell.episode.text = vm.episode
-            cell.name.text = vm.name
+            cell.update(with: vm)
         }
         epCollection.dataSource = datasource
     }

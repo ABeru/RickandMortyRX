@@ -12,4 +12,9 @@ class DetailsCell: UICollectionViewCell {
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var airDate: UILabel!
     
+    func update(with item: EpisodeRes) {
+        episode.text = item.episode
+        name.text = item.name
+        airDate.text = item.airDate
+    }
 }

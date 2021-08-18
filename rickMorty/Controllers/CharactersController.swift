@@ -10,6 +10,8 @@ import LUAutocompleteView
 import RxSwift
 import RxCocoa
 import SDWebImage
+import RxReachability
+import Reachability
 class CharactersController: UIViewController {
     @IBOutlet weak var charColl: UICollectionView!
     @IBOutlet private weak var season: UILabel!
@@ -32,6 +34,12 @@ class CharactersController: UIViewController {
             .subscribe(onNext: { [self] response in
                 loadData()
             }).disposed(by: db)
+        Reachability.rx.isReachable
+            .subscribe(onNext: { connection in
+                if connection == false {
+                self.ShowConnectionAlert()
+                }
+            }).disposed(by: db)
     }
     private func Assign() {
         charColl.delegate = self
@@ -48,15 +56,7 @@ class CharactersController: UIViewController {
     }
     private func DisplayCell() {
         datasource = CollViewDataSource(cellIdentifier: "charCell", items: vm.character.value) { cell, vm in
-            cell.charName.text = vm.name
-            if vm.status != "Alive" {
-                cell.charStatus.textColor = .red
-            }
-            else {
-                cell.charStatus.textColor = .green
-            }
-            cell.charStatus.text = vm.status
-            cell.charImg.sd_setImage(with: URL(string: vm.image))
+            cell.upate(with: vm)
             }
     
         charColl.dataSource = datasource

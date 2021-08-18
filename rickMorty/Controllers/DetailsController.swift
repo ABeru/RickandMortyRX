@@ -10,6 +10,8 @@ import LUAutocompleteView
 import RxSwift
 import RxCocoa
 import SDWebImage
+import Reachability
+import RxReachability
 class DetailsController: UIViewController {
     @IBOutlet private weak var charImg: UIImageView!
     @IBOutlet private weak var status: UILabel!
@@ -31,6 +33,12 @@ class DetailsController: UIViewController {
             .subscribe(onNext: { [self] response in
                 AttachUI(response!)
                 loadEpisodes()
+            }).disposed(by: db)
+        Reachability.rx.isReachable
+            .subscribe(onNext: { connection in
+                if connection == false {
+                self.ShowConnectionAlert()
+                }
             }).disposed(by: db)
     }
     private func Assign() {
@@ -55,9 +63,7 @@ class DetailsController: UIViewController {
     }
     private func DisplayCell() {
         datasource = CollViewDataSource(cellIdentifier: "detailCell", items: vm.detEpisodes.value) { cell, vm in
-            cell.airDate.text = vm.airDate
-            cell.episode.text = vm.episode
-            cell.name.text = vm.name
+            cell.update(with: vm)
         }
         episodesColl.dataSource = self.datasource
     

@@ -12,4 +12,6 @@ pod 'LUAutocompleteView'
   pod 'RxCocoa'
   pod 'SDWebImage'
   pod 'IQKeyboardManagerSwift'
+  pod 'ReachabilitySwift'
+pod 'RxReachability'
 end

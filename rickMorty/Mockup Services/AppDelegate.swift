@@ -7,15 +7,21 @@
 
 import UIKit
 import CoreData
+import Reachability
+import RxSwift
+import RxCocoa
 import IQKeyboardManagerSwift
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-
-
+    var reachability: Reachability?
+  var db = DisposeBag()
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         IQKeyboardManager.shared.enable = true
+        reachability = try! Reachability()
+        
+        try? reachability?.startNotifier()
+
         return true
     }
 
